@@ -1,13 +1,33 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
 
-export default function Login() {
+
+
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";export default function Login() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({ username: "", password: "" });
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // ✅ SLIDESHOW IMAGES
+  const images = [
+    "https://tse1.mm.bing.net/th/id/OIP.KOnqTsYD8ejjAHpupTjKswHaEo?pid=Api&P=0&h=180",
+    "https://tse3.mm.bing.net/th/id/OIP.0BkSdKUAj2jqe94Fmd52GQHaE8?pid=Api&P=0&h=180",
+    "http://images4.fanpop.com/image/photos/22000000/Pets-animals-and-pets-22036172-1024-768.jpg",
+    "https://tse1.mm.bing.net/th/id/OIP.er3a-PMbyPbuzO_XziuAHwHaFJ?pid=Api&P=0&h=180",
+  ];
+
+  // ✅ SLIDESHOW EFFECT (PUT THIS HERE)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % images.length);
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,14 +35,8 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
 
-    // IMPORTANT:
-    // localhost → browser
-    // backend → docker-to-docker only
-    const API_URL = "http://localhost:5000/api";
-
-    const url = isLogin ? `${API_URL}/login` : `${API_URL}/register`;
+    const url = isLogin ? "/api/login" : "/api/register";
 
     try {
       const res = await fetch(url, {
@@ -33,93 +47,74 @@ export default function Login() {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        setError(data.message || "Authentication failed");
-        return;
-      }
-
-    
-      if (isLogin) {
+      if (res.ok && data.token) {
         localStorage.setItem("jwtToken", data.token);
         localStorage.setItem("username", form.username);
         navigate("/home");
+      } else {
+        setError(data.message || "Authentication failed");
       }
-
-      else {
-        setSuccess("Registration successful! Please login.");
-        setIsLogin(true);
-        setForm({ username: "", password: "" });
-      }
-
-    } catch (err) {
-      console.error(err);
+    } catch {
       setError("Server error, please try again later.");
     }
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <h2>{isLogin ? "Login" : "Sign Up"}</h2>
-
-      <input
-        name="username"
-        placeholder="Username"
-        value={form.username}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
-
-      <button className="login-btn" type="submit">
-        {isLogin ? "Login" : "Sign Up"}
-      </button>
-
-      {error && <div style={{ color: "red", textAlign: "center" }}>{error}</div>}
-      {success && (
-        <div style={{ color: "green", textAlign: "center" }}>{success}</div>
-      )}
-
-      <div style={{ marginTop: "1rem", textAlign: "center" }}>
-        {isLogin ? (
-          <>
-            New user?{" "}
-            <button
-              type="button"
-              className="login-btn"
-              onClick={() => {
-                setIsLogin(false);
-                setError("");
-                setSuccess("");
-              }}
-            >
-              Sign Up
-            </button>
-          </>
-        ) : (
-          <>
-            Already have an account?{" "}
-            <button
-              type="button"
-              className="login-btn"
-              onClick={() => {
-                setIsLogin(true);
-                setError("");
-                setSuccess("");
-              }}
-            >
-              Log In
-            </button>
-          </>
-        )}
+    <div className="login-page split-layout">
+      {/* LEFT SLIDESHOW */}
+      <div className="login-image">
+        <img src={images[currentSlide]} alt="Pet" />
       </div>
-    </form>
+
+      {/* RIGHT LOGIN SECTION */}
+      <div className="login-right">
+        <form className="login-form card" onSubmit={handleSubmit}>
+          <h2>{isLogin ? "LOGIN" : "SIGN UP"}</h2>
+
+          <label>Username</label>
+          <input
+            name="username"
+            placeholder="Enter your username"
+            value={form.username}
+            onChange={handleChange}
+            required
+          />
+
+
+
+
+
+          <label>Password</label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+
+          <button className="login-btn" type="submit">
+            {isLogin ? "Login" : "Sign Up"}
+          </button>
+
+          {error && <p className="error-text">{error}</p>}
+
+          <p className="switch-text">
+            {isLogin ? (
+              <>
+                Don’t have an account?{" "}
+                <span onClick={() => setIsLogin(false)}>SIGN UP</span>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <span onClick={() => setIsLogin(true)}>LOG IN</span>
+              </>
+            )}
+          </p>
+        </form>
+      </div>
+    </div>
   );
 }

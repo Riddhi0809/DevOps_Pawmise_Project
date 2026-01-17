@@ -1,4 +1,4 @@
-/* Import a stylish font (Pacifico) if desired */
+/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Lavishly+Yours&display=swap');
 
 .navbar {
@@ -6,15 +6,9 @@
   width: 100%;
   box-shadow: 0 2px 8px rgba(170, 0, 119, 0.06);
   padding-bottom: 0.3rem;
-  
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
+/* Logo row */
 .logo-row {
   width: 100%;
   display: flex;
@@ -22,30 +16,27 @@
   align-items: center;
   padding-top: 0.7rem;
   padding-bottom: 0.2rem;
-  background-color:  #ffb6c9;
+  background-color: #ffb6c9;
 }
-.logo {
 
-font-size: 3rem !important;     
+.logo {
+  font-size: 3rem !important;
   font-family: 'Delius Swash Caps';
   color: #49224a;
-  margin: 0;
   letter-spacing: 2px;
-  text-align: center;
   font-weight: bold;
-  }
+}
 
+/* Navigation */
 nav {
   position: relative;
   width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
+/* Right-side nav links */
 .nav-links {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;       
+  justify-content: flex-end;
   align-items: center;
   gap: 2.1rem;
   padding: 0.4rem 3rem 0.3rem 0;
@@ -53,25 +44,49 @@ nav {
   font-family: 'Delius Swash Caps';
 }
 
-
+/* Links */
 .nav-links a {
   text-decoration: none;
   color: #7b107b;
   font-weight: 500;
-  transition: color 0.16s;
-  position: relative;
   padding: 0.3rem 0.7rem;
   border-radius: 20px;
+  transition: all 0.2s ease;
 }
 
-.nav-links a:hover, .nav-links .active {
+.nav-links a:hover,
+.nav-links .active {
   background: #ffc6ee;
   color: #a90077;
 }
 
+/* Logout button - now matches nav links */
+.logout-btn {
+  background: transparent;          /* same as links */
+  color: #7b107b;                   /* same text color as links */
+  border: none;                     /* no border like links */
+  padding: 0.3rem 0.7rem;           /* same padding as links */
+  border-radius: 20px;              /* same rounded edges */
+  font-family: 'Delius Swash Caps';
+  font-size: 1.08rem;               /* match nav links font size */
+  font-weight: 500;                 /* match nav links weight */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;            /* remove underline if any */
+}
+
+/* Hover effect same as nav links */
+.logout-btn:hover {
+  background: #ffc6ee;              /* same hover background */
+  color: #a90077;                   /* same hover text color */
+  transform: none;                  /* no translate needed */
+}
+
+
+/* Welcome text (left side) */
 .welcome {
   position: absolute;
-  left: 1.7rem;    
+  left: 1.7rem;
   top: 0.45rem;
   color: #7b107b;
   font-size: 1rem;

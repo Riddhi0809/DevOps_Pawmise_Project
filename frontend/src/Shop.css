@@ -1,0 +1,97 @@
+.adopt-grid-container {
+  max-width: 1200px;
+  margin: 2.5rem auto 2rem auto;
+  padding: 2.5rem 1.5rem 1rem 1.5rem;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 42px rgba(120,41,120,0.13);
+}
+
+.adopt-title {
+  text-align: left;
+  font-size: 2.25rem;
+  color: #692169;
+  font-weight: 800;
+  margin-bottom: 2.25rem;
+  margin-left: 1.5rem;
+  letter-spacing: 0.7px;
+  font-family: 'Lexend', 'Roboto', sans-serif;
+}
+
+.pet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.2rem;
+}
+
+.pet-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 20px 0 rgba(64,28,65,0.13);
+  padding: 1.2rem 1.4rem 1.9rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.13s, box-shadow 0.13s;
+  border: 1.7px solid #f4e4f4;
+  position: relative;
+}
+
+.pet-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 10px 32px rgba(111, 17, 90, 0.16);
+  border-color: #ffb9ee;
+}
+
+/* Show a cart or buy button at the bottom. */
+.pet-card .view-btn {
+  background: #ff3389;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.65rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  transition: background 0.13s;
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
+}
+.pet-card .view-btn:hover {
+  background: #d22e75;
+}
+
+/* Larger images with white background */
+.pet-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background: #faf8fa;
+  box-shadow: 0 2px 7px rgba(90,40,95,0.06);
+  border: 1.5px solid #eed3ee;
+  padding: 0.35rem;
+}
+
+.pet-name {
+  font-size: 1.23rem;
+  color: #6d106d;
+  margin: 0.8rem 0 0.27rem 0;
+  font-weight: 600;
+  font-family: 'Lexend', 'Roboto', sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.pet-price {
+  font-size: 1.12rem;
+  color: #ff3389;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-family: 'Lexend', 'Roboto', sans-serif;
+  text-align: center;
+}

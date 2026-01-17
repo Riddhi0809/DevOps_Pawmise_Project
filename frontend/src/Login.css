@@ -1,45 +1,187 @@
-.login-form {
-  max-width: 320px;
-  margin: 5rem auto;
-  padding: 2rem 1.2rem;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 2px 16px rgba(128, 17, 163, 0.07);
+
+/* PAGE BACKGROUND */
+.login-page.split-layout {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe6f0, #ffd1e8);
+  overflow: hidden;
 }
 
+/* LEFT SLIDESHOW CONTAINER */
+.login-slideshow {
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* SLIDES WRAPPER */
+.slides {
+  display: flex;
+  height: 100%;
+  width: 300%; /* 3 images = 300% */
+  transition: transform 1.1s ease-in-out;
+}
+
+/* EACH IMAGE */
+.slides img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* RIGHT SIDE */
+.login-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LOGIN CARD */
+.login-form.card {
+  background: white;
+  padding: 2.5rem;
+  width: 360px;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* HEADINGS */
 .login-form h2 {
-  color: #760689;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #7b107b;
+  letter-spacing: 1px;
 }
 
+/* LABELS */
+.login-form label {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* INPUTS */
 .login-form input {
-  padding: .6rem;
-  border: 1.5px solid #e5d9ea;
-  border-radius: 5px;
-  font-size: 1rem;
-  background: #faf6fa;
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-.login-form input:focus {
-  border-color: #760689;
-  outline: none;
-}
-
+/* BUTTON */
 .login-btn {
-  padding: 0.7rem;
-  border-radius: 5px;
+  width: 100%;
+  padding: 12px;
+  background: #ff69b4;
   border: none;
-  background: #760689;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: .5rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.18s;
 }
 
-.login-btn:hover { background: #53045f; }
+.login-btn:hover {
+  background: #ff4fa3;
+}
+
+/* SWITCH TEXT */
+.switch-text {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.switch-text span {
+  color: #ff4fa3;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ERROR */
+.error-text {
+  color: #b60046;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* PAGE BACKGROUND */
+.login-page.split-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffe6f0, #ffd1e8);
+}
+
+/* LEFT SLIDESHOW – EXACT 50% */
+.login-image {
+  width: 50vw;       /* 🔥 exactly half screen */
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* SLIDESHOW IMAGE FULL COVER */
+.login-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 fills entire half */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+/* RIGHT SIDE – OTHER 50% */
+.login-right {
+  width: 50vw;       /* 🔥 other half */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LOGIN CARD */
+.login-form.card {
+  background: white;
+  padding: 2.5rem;
+  width: 360px;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* BUTTON */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff69b4;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #53045f;
+}
+
+
+/* RESPONSIVE (STACK ON MOBILE) */
+@media (max-width: 900px) {
+  .login-page.split-layout {
+    flex-direction: column;
+  }
+
+  .login-slideshow {
+    height: 45vh;
+  }
+
+  .slides img {
+    height: 45vh;
+  }
+
+}
